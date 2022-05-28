@@ -1,27 +1,29 @@
 import { useSelector } from "react-redux";
 import styled, { css } from "styled-components/macro";
 import Auth from "../Auth/Auth";
+import LoadingModal from "../UI/Modal/LoadingModal";
 
 const StyledApp = styled.div`
   height: 100vh;
   width: 100vw;
+  position: absolute;
 
+  // Blur <App> when a base modal (those wrapped with <BaseModalWrapper>) is open
   ${(props) =>
-    props.isModalOpen &&
+    props.isBaseModalOpen &&
     css`
       filter: blur(2px);
     `}
 `;
 
 function App() {
-  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
-
+  const isBaseModalOpen = useSelector((state) => state.modal.isBaseModalOpen);
+  const loadingModalMsg = useSelector((state) => state.modal.loadingModalMsg);
   return (
-    <>
-      <StyledApp isModalOpen={isModalOpen}>
-        <Auth />
-      </StyledApp>
-    </>
+    <StyledApp isBaseModalOpen={isBaseModalOpen}>
+      <Auth />
+      {loadingModalMsg !== "" && <LoadingModal message="Loading..." />}
+    </StyledApp>
   );
 }
 

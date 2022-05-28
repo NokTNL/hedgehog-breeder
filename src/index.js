@@ -6,6 +6,8 @@ import store from "./app/store";
 import App from "./app/App";
 // normalize.css
 import "./index.css";
+// Bootstrap icons (NOT Bootstrap!)
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 ReactDOM.render(
   <React.StrictMode>

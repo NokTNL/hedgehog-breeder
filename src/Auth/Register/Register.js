@@ -1,43 +1,40 @@
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import registerThunk from "./registerThunk";
 import { AuthContext } from "../Auth";
-import styled from "styled-components/macro";
-import ModalBackdrop from "../../UI/Modal/ModalBackdrop";
-import CredentialCard, * as CC from "../components/CredentialCard/CredentialCard";
 
-const StyledRegister = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import BaseModalWrapper from "../../UI/Modal/BaseModalWrapper";
+import CredentialCard, * as CC from "../components/CredentialCard/CredentialCard";
+import CloseBtn from "./CloseBtn";
 
 export default function Register() {
   const authCtx = useContext(AuthContext);
-  const handleRegister = () => {
-    // *** TODO: Add fetching logic
+  const dispatch = useDispatch();
+  const handleRegister = async () => {
+    // *** TODO: pass Info into the thunk
+    await dispatch(registerThunk());
     // Close itself
     authCtx.setIsRegistering(false);
   };
   return (
-    <ModalBackdrop>
-      <StyledRegister>
-        <CredentialCard>
-          <CC.Header>Register yourself!</CC.Header>
-          <CC.Form>
-            <CC.FormEntry>
-              <CC.FormLabelSpan>Your eeemail:</CC.FormLabelSpan>
-              <CC.FormInput />
-            </CC.FormEntry>
-            <CC.FormEntry>
-              <CC.FormLabelSpan>Your seeecret phrase:</CC.FormLabelSpan>
-              <CC.FormInput />
-            </CC.FormEntry>
-          </CC.Form>
-          <CC.ButtonsCtn>
-            <CC.FormBtn onClick={handleRegister}>Let's gooo!</CC.FormBtn>
-          </CC.ButtonsCtn>
-        </CredentialCard>
-      </StyledRegister>
-    </ModalBackdrop>
+    <BaseModalWrapper>
+      <CredentialCard>
+        <CloseBtn />
+        <CC.Header>Register yourself!</CC.Header>
+        <CC.Form>
+          <CC.FormEntry>
+            <CC.FormLabelSpan>Your eeemail:</CC.FormLabelSpan>
+            <CC.FormInput />
+          </CC.FormEntry>
+          <CC.FormEntry>
+            <CC.FormLabelSpan>Your seeecret phrase:</CC.FormLabelSpan>
+            <CC.FormInput />
+          </CC.FormEntry>
+        </CC.Form>
+        <CC.ButtonsCtn>
+          <CC.FormBtn onClick={handleRegister}>Let's gooo!</CC.FormBtn>
+        </CC.ButtonsCtn>
+      </CredentialCard>
+    </BaseModalWrapper>
   );
 }

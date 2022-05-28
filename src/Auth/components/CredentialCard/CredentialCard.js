@@ -13,6 +13,9 @@ const CredentialCard = styled.section`
   padding: 2rem;
   background-color: white;
 
+  // To enable child elements using absolute positioning
+  position: absolute;
+
   text-align: center;
   display: flex;
   flex-direction: column;

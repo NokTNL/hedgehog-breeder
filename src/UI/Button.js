@@ -1,7 +1,6 @@
 import styled from "styled-components/macro";
 
 const Button = styled.button`
-  background-color: transparent;
   border: 0.1rem solid black;
   border-radius: 1em;
   padding: 0.5em 1em;

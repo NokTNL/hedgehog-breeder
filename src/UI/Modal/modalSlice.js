@@ -3,11 +3,22 @@ import { createSlice } from "@reduxjs/toolkit";
 const modalSlice = createSlice({
   name: "modal",
   initialState: {
-    isModalOpen: false,
+    isBaseModalOpen: false,
+    // loadingModalMsg === "" means the modal is not shown
+    loadingModalMsg: "",
   },
   reducers: {
-    setModal(state, action) {
-      state.isModalOpen = !!action.payload;
+    showBaseModal(state, action) {
+      state.isBaseModalOpen = !!action.payload;
+    },
+    loadModalMsg(state, action) {
+      const msg = action.payload;
+      if (typeof msg !== "string") {
+        throw new Error(
+          `modalSlice.loadModalMsg: payload ${msg} has improper type ${typeof msg}`
+        );
+      }
+      state.loadingModalMsg = msg;
     },
   },
 });
