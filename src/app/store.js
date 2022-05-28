@@ -1,15 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import exampleSlice from "./exampleSlice";
+import modalSlice from "../UI/Modal/modalSlice";
 
 const store = configureStore({
   reducer: {
-    example: exampleSlice.reducer,
+    modal: modalSlice.reducer,
   },
 });
-
-export const actions = {
-  example: exampleSlice.actions,
-};
 
 export default store;

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../Auth";
 import styled from "styled-components/macro";
 import CredentialCard, * as CC from "../components/CredentialCard/CredentialCard";
 
@@ -10,6 +12,10 @@ const StyledLogin = styled.main`
 `;
 
 export default function Login() {
+  const authCtx = useContext(AuthContext);
+  const handleRegister = () => {
+    authCtx.setIsRegistering(true);
+  };
   return (
     <StyledLogin>
       <CredentialCard>
@@ -25,8 +31,10 @@ export default function Login() {
           </CC.FormEntry>
         </CC.Form>
         <CC.ButtonsCtn>
-          <CC.FormBtn>Registerrrr</CC.FormBtn>
           <CC.FormBtn>Logiiiin!</CC.FormBtn>
+          <CC.FormBtn onClick={handleRegister}>
+            I am neeew to here...
+          </CC.FormBtn>
         </CC.ButtonsCtn>
       </CredentialCard>
     </StyledLogin>

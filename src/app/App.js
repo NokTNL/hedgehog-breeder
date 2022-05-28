@@ -1,16 +1,27 @@
-import styled from "styled-components/macro";
+import { useSelector } from "react-redux";
+import styled, { css } from "styled-components/macro";
 import Auth from "../Auth/Auth";
 
 const StyledApp = styled.div`
   height: 100vh;
   width: 100vw;
+
+  ${(props) =>
+    props.isModalOpen &&
+    css`
+      filter: blur(2px);
+    `}
 `;
 
 function App() {
+  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
+
   return (
-    <StyledApp>
-      <Auth />
-    </StyledApp>
+    <>
+      <StyledApp isModalOpen={isModalOpen}>
+        <Auth />
+      </StyledApp>
+    </>
   );
 }
 
