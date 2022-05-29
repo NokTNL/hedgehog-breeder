@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Auth";
 import styled from "styled-components/macro";
-import CredentialCard, * as CC from "../components/CredentialCard/CredentialCard";
+import Card, * as CardItems from "../../UI/Card/Card";
 
 const StyledLogin = styled.main`
   height: 100%;
@@ -11,6 +11,10 @@ const StyledLogin = styled.main`
   align-items: center;
 `;
 
+const StyledCard = styled(Card)`
+  border: 0.1rem solid gray;
+`;
+
 export default function Login() {
   const authCtx = useContext(AuthContext);
   const handleRegister = () => {
@@ -18,25 +22,27 @@ export default function Login() {
   };
   return (
     <StyledLogin>
-      <CredentialCard>
-        <CC.Header>Login to your incubator</CC.Header>
-        <CC.Form>
-          <CC.FormEntry>
-            <CC.FormLabelSpan>Your eeemail:</CC.FormLabelSpan>
-            <CC.FormInput />
-          </CC.FormEntry>
-          <CC.FormEntry>
-            <CC.FormLabelSpan>Your seeecret phrase:</CC.FormLabelSpan>
-            <CC.FormInput />
-          </CC.FormEntry>
-        </CC.Form>
-        <CC.ButtonsCtn>
-          <CC.FormBtn>Logiiiin!</CC.FormBtn>
-          <CC.FormBtn onClick={handleRegister}>
+      <StyledCard>
+        <CardItems.Header>Login to your incubator</CardItems.Header>
+        <CardItems.Form>
+          <CardItems.FormEntry>
+            <CardItems.FormLabelSpan>Your eeemail:</CardItems.FormLabelSpan>
+            <CardItems.FormInput />
+          </CardItems.FormEntry>
+          <CardItems.FormEntry>
+            <CardItems.FormLabelSpan>
+              Your seeecret phrase:
+            </CardItems.FormLabelSpan>
+            <CardItems.FormInput />
+          </CardItems.FormEntry>
+        </CardItems.Form>
+        <CardItems.ButtonsCtn>
+          <CardItems.FormBtn>Logiiiin!</CardItems.FormBtn>
+          <CardItems.FormBtn onClick={handleRegister}>
             I am neeew to here...
-          </CC.FormBtn>
-        </CC.ButtonsCtn>
-      </CredentialCard>
+          </CardItems.FormBtn>
+        </CardItems.ButtonsCtn>
+      </StyledCard>
     </StyledLogin>
   );
 }

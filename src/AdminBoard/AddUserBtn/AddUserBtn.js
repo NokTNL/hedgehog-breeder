@@ -1,7 +1,8 @@
 import UserDataContext from "../UserDataContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import styled from "styled-components/macro";
+import AddUserModal from "./AddUserModal";
 
 const StyledButton = styled.button`
   position: sticky;
@@ -19,13 +20,19 @@ const StyledButton = styled.button`
 
 export default function AddUserBtn() {
   const userDataCtx = useContext(UserDataContext);
+  const [isAddingUser, setIsAddingUser] = useState(false);
+
+  const handleChooseAdd = () => {
+    setIsAddingUser(true);
+  };
 
   return (
     <>
-      <StyledButton>
+      <StyledButton onClick={handleChooseAdd}>
         <span>Breeed a new hedgehog </span>
         <i className="bi bi-plus-circle"></i>
       </StyledButton>
+      {isAddingUser && <AddUserModal setIsAddingUser={setIsAddingUser} />}
     </>
   );
 }

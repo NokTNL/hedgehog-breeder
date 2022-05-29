@@ -1,6 +1,7 @@
 import UserDataContext from "../UserDataContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components/macro";
+import DeleteUserModal from "./DeleteUserModal";
 
 const StyledLi = styled.li`
   // For positioning children
@@ -21,6 +22,11 @@ const Avatar = styled.img`
   object-fit: cover;
   height: 8rem;
   width: 8rem;
+  border-radius: 50%;
+`;
+
+const DeleteTxt = styled.span`
+  display: none;
 `;
 
 const DeleteBtn = styled.button`
@@ -33,12 +39,14 @@ const DeleteBtn = styled.button`
 `;
 
 export default function UserCard({ userIndex }) {
+  const [isConfirmingDel, setIsConfirmingDel] = useState(false);
+
+  // Extract data
   const userDataCtx = useContext(UserDataContext);
   const { first_name: userName, avatar: imgUrl } = userDataCtx[userIndex];
 
-  const handleDelete = () => {
-    // *** Do something with userIndex
-    console.log(userIndex);
+  const handleChooseDelete = () => {
+    setIsConfirmingDel(true);
   };
 
   return (
@@ -46,10 +54,18 @@ export default function UserCard({ userIndex }) {
       <StyledLi>
         <Avatar src={imgUrl} alt={userName} />
         <div>{userName}</div>
-        <DeleteBtn onClick={handleDelete}>
+        <DeleteBtn onClick={handleChooseDelete}>
+          {/* For accessibility */}
+          <DeleteTxt>Delete</DeleteTxt>
           <i className="bi bi-trash"></i>
         </DeleteBtn>
       </StyledLi>
+      {isConfirmingDel && (
+        <DeleteUserModal
+          userIndex={userIndex}
+          setIsConfirmingDel={setIsConfirmingDel}
+        />
+      )}
     </>
   );
 }

@@ -6,10 +6,15 @@ const StyledNav = styled.nav`
   padding: 1rem;
 `;
 
+const LogoutButton = styled(Button)`
+  padding: 0.5rem 3rem;
+  font-size: 1rem;
+`;
+
 export default function Nav() {
   return (
     <StyledNav>
-      <Button>Logout</Button>
+      <LogoutButton>Logout</LogoutButton>
     </StyledNav>
   );
 }

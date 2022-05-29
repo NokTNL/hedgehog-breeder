@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import Button from "../../../UI/Button";
+import Button from "../Button";
 
 export const ButtonsCtn = styled.section`
   display: flex;

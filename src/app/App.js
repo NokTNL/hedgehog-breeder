@@ -22,8 +22,8 @@ function App() {
   const loadingModalMsg = useSelector((state) => state.modal.loadingModalMsg);
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
-      <Auth />
-      {/* <AdminBoard /> */}
+      {/* <Auth /> */}
+      <AdminBoard />
       {loadingModalMsg !== "" && <LoadingModal message="Loading..." />}
     </StyledApp>
   );

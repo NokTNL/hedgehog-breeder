@@ -4,7 +4,7 @@ import registerThunk from "./registerThunk";
 import { AuthContext } from "../Auth";
 
 import BaseModalWrapper from "../../UI/Modal/BaseModalWrapper";
-import * as CC from "../components/CredentialCard/CredentialCard";
+import * as Card from "../../UI/Card/Card";
 
 export default function RegisterModal() {
   const authCtx = useContext(AuthContext);
@@ -22,20 +22,20 @@ export default function RegisterModal() {
 
   return (
     <BaseModalWrapper onClose={handleClose}>
-      <CC.Header>Register yourself!</CC.Header>
-      <CC.Form>
-        <CC.FormEntry>
-          <CC.FormLabelSpan>Your eeemail:</CC.FormLabelSpan>
-          <CC.FormInput />
-        </CC.FormEntry>
-        <CC.FormEntry>
-          <CC.FormLabelSpan>Your seeecret phrase:</CC.FormLabelSpan>
-          <CC.FormInput />
-        </CC.FormEntry>
-      </CC.Form>
-      <CC.ButtonsCtn>
-        <CC.FormBtn onClick={handleRegister}>Let's gooo!</CC.FormBtn>
-      </CC.ButtonsCtn>
+      <Card.Header>Register yourself!</Card.Header>
+      <Card.Form>
+        <Card.FormEntry>
+          <Card.FormLabelSpan>Your eeemail:</Card.FormLabelSpan>
+          <Card.FormInput />
+        </Card.FormEntry>
+        <Card.FormEntry>
+          <Card.FormLabelSpan>Your seeecret phrase:</Card.FormLabelSpan>
+          <Card.FormInput />
+        </Card.FormEntry>
+      </Card.Form>
+      <Card.ButtonsCtn>
+        <Card.FormBtn onClick={handleRegister}>Let's gooo!</Card.FormBtn>
+      </Card.ButtonsCtn>
     </BaseModalWrapper>
   );
 }

@@ -5,19 +5,11 @@ import modalSlice from "./modalSlice";
 
 import styled from "styled-components/macro";
 import GenericBackdrop from "./GenericBackdrop";
+import Card from "../Card/Card";
 
-const BaseModalCard = styled.section`
-  border-radius: 2rem;
-  padding: 2rem;
-  background-color: white;
-
+const BaseModalCard = styled(Card)`
   // To enable child elements using absolute positioning
   position: absolute;
-
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
 `;
 
 const CloseBtn = styled.button`
@@ -26,6 +18,10 @@ const CloseBtn = styled.button`
   right: 1rem;
 
   font-size: 1.5rem;
+`;
+
+const CloseTxt = styled.span`
+  display: none;
 `;
 
 // This component is used to wrap anything that needs a base modal. Uses portal to render outside <App>
@@ -44,6 +40,8 @@ export default function BaseModalWrapper({ children, onClose }) {
       <BaseModalCard>
         {/* CloseBtn executes the passed in callback when clicked */}
         <CloseBtn onClick={onClose}>
+          {/* Accesibility */}
+          <CloseTxt>Close message</CloseTxt>
           <i className="bi bi-x-circle"></i>
         </CloseBtn>
         {children}
