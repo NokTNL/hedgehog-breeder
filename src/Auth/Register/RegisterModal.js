@@ -1,18 +1,16 @@
 import { useRef } from "react";
-import { useAuthContext, useAuthDispatch } from "../AuthContext";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import registerThunk from "./registerThunk";
 
 import BaseModalWrapper from "../../UI/Modal/BaseModalWrapper";
 import * as Card from "../../UI/Card/Card";
 
-export default function RegisterModal() {
-  const { breederCredentials } = useAuthContext();
-  const authDispatch = useAuthDispatch();
+export default function RegisterModal({ setIsRegistering }) {
+  const dispatch = useDispatch();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const dispatch = useDispatch();
 
   const handleRegister = async (event) => {
     /**
@@ -26,40 +24,37 @@ export default function RegisterModal() {
       return;
     }
     event.preventDefault();
-    /**
-     * Check if user already exists
-     **/
-    const newEmail = emailRef.current.value;
-    const newPassword = passwordRef.current.value;
-    if (breederCredentials.some((breeder) => breeder.email === newEmail)) {
-      alert(
-        "There's already another breeder using this e-mail...please try another one."
-      );
-      return;
-    }
 
     /**
-     * Posting user creation request...
+     * Send registration request
      */
-    await dispatch(
-      registerThunk({
-        email: newEmail,
-        password: newPassword,
-      })
-    );
-    /**
-     * ... but need to fake adding to remote database locally
-     */
-    authDispatch({
-      type: "ADD_BREEDER",
-      email: newEmail,
-      password: newPassword,
-    });
+    try {
+      await dispatch(
+        registerThunk({
+          newEmail: emailRef.current.value,
+          newPassword: passwordRef.current.value,
+        })
+      );
+    } catch (error) {
+      if (error.cause === "DUPLICATE_EMAIL") {
+        alert(
+          "There's already another breeder using this e-mail...please try another one."
+        );
+        return;
+      } else {
+        alert(
+          "There's something wrong with the registration...please try again."
+        );
+        throw error;
+      }
+    }
     alert("Registration successful!");
+    // close RegisterModal if succesful
+    setIsRegistering(false);
   };
 
   const handleClose = () => {
-    authDispatch({ type: "IS_REGISTERING", payload: false });
+    setIsRegistering(false);
   };
 
   return (

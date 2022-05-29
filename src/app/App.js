@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { AuthProvider } from "../Auth/AuthContext";
 
 import styled, { css } from "styled-components/macro";
 import AdminBoard from "../AdminBoard/AdminBoard";
@@ -24,13 +23,7 @@ function App() {
   const loadingModalMsg = useSelector((state) => state.modal.loadingModalMsg);
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
-      {/**
-       * Auth page
-       */}
-      <AuthProvider>
-        <Auth />
-      </AuthProvider>
-      {/* <AdminBoard /> */}
+      <Auth />
       {loadingModalMsg !== "" && <LoadingModal message={loadingModalMsg} />}
     </StyledApp>
   );

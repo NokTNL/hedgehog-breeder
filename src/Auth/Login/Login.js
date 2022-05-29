@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useAuthContext, useAuthDispatch } from "../AuthContext";
+import { useSelector } from "react-redux";
 import styled from "styled-components/macro";
 import Card, * as CardItems from "../../UI/Card/Card";
 
@@ -15,12 +15,13 @@ const StyledCard = styled(Card)`
   border: 0.1rem solid gray;
 `;
 
-export default function Login() {
-  const { breederCredentials } = useAuthContext();
-  const authDispatch = useAuthDispatch();
-
+export default function Login({ setIsRegistering }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  const breederCredentials = useSelector(
+    (state) => state.auth.breederCredentials
+  );
 
   const handleLogin = () => {
     /**
@@ -43,8 +44,9 @@ export default function Login() {
   };
 
   const handleChooseRegister = () => {
-    authDispatch({ type: "IS_REGISTERING", payload: true });
+    setIsRegistering(true);
   };
+
   return (
     <StyledLogin>
       <StyledCard>

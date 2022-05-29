@@ -1,13 +1,14 @@
-import { useAuthContext } from "./AuthContext";
+import { useState } from "react";
 import Login from "./Login/Login";
 import RegisterModal from "./Register/RegisterModal";
 
 export default function Auth() {
-  const { isRegistering } = useAuthContext();
+  const [isRegistering, setIsRegistering] = useState(false);
+
   return (
     <>
-      <Login />
-      {isRegistering && <RegisterModal />}
+      <Login setIsRegistering={setIsRegistering} />
+      {isRegistering && <RegisterModal setIsRegistering={setIsRegistering} />}
     </>
   );
 }
