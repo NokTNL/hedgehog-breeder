@@ -6,15 +6,12 @@ export const Header = styled.h3``;
 export * from "./Form";
 export * from "./ButtonsCtn";
 
-// Main card
+// This is a card-shaped wrapper in case needed
 const CredentialCard = styled.section`
   border: 0.1rem solid black;
   border-radius: 2rem;
   padding: 2rem;
   background-color: white;
-
-  // To enable child elements using absolute positioning
-  position: absolute;
 
   text-align: center;
   display: flex;

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import styled, { css } from "styled-components/macro";
+import AdminBoard from "../AdminBoard/AdminBoard";
 import Auth from "../Auth/Auth";
 import LoadingModal from "../UI/Modal/LoadingModal";
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
       <Auth />
+      {/* <AdminBoard /> */}
       {loadingModalMsg !== "" && <LoadingModal message="Loading..." />}
     </StyledApp>
   );

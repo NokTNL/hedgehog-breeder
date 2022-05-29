@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 :root,
-body {
+body,
+ul {
   margin: 0;
   padding: 0;
 }
@@ -16,4 +17,8 @@ button {
   cursor: pointer;
   background-color: transparent;
   border: none;
+}
+
+li {
+  list-style: none;
 }
