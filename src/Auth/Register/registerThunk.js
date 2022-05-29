@@ -1,6 +1,6 @@
 import modalSlice from "../../UI/Modal/modalSlice";
 
-export default function registerThunk() {
+export default function registerThunk({ email, password }) {
   return async (dispatch) => {
     dispatch(modalSlice.actions.loadModalMsg("Sending your request..."));
     // TODO: fetch data with this
