@@ -44,7 +44,7 @@ export default function RegisterModal({ setIsRegistering }) {
 
   return (
     <BaseModalWrapper onClose={handleClose}>
-      <Card.Header>Register yourself!</Card.Header>
+      <Card.Header>Register yourself as a new breeder!</Card.Header>
       <Card.Form id="registration-form">
         <Card.FormEntry>
           <Card.FormLabelSpan>Your eeemail:</Card.FormLabelSpan>
