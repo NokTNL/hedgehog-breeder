@@ -1,20 +1,28 @@
-import modalSlice from "../../UI/Modal/modalSlice";
+import fetchClientThunk from "../../fetch/fetchClientThunk";
 import authSlice from "../authSlice";
 
 export default function registerThunk({ newEmail, newPassword }) {
   return async (dispatch, getState) => {
-    // Display loading modal
-    dispatch(modalSlice.actions.loadModalMsg("Sending your request..."));
     try {
       /**
        * Send registration request ...
        */
 
-      // TODO: fetch data with this
-      // await new Promise(() => {});
+      await dispatch(
+        fetchClientThunk({
+          loadMsg: "Sending your request...",
+          method: "POST",
+          endpoint: "register",
+          data: {
+            // It should send real email here but the API only accepts email existing on their server
+            email: "eve.holt@reqres.in",
+            password: newPassword,
+          },
+        })
+      );
 
       /**
-       * Check if user already exists (usually performed on the backend)
+       * Check if user already exists (usually performed on the backend) ...
        **/
       const breederCredentials = getState().auth.breederCredentials;
       if (breederCredentials.some((breeder) => breeder.email === newEmail)) {
@@ -23,16 +31,24 @@ export default function registerThunk({ newEmail, newPassword }) {
           { cause: "DUPLICATE_EMAIL" }
         );
       }
-
       /**
-       * ... so, fake adding to databse locally
+       * ... and fake adding to database locally
        */
       dispatch(
         authSlice.actions.addBreeder({ email: newEmail, password: newPassword })
       );
-    } finally {
-      // *** Remember to close LoadingModal after finish loading (or not? Close when the logged in page has loaded)
-      dispatch(modalSlice.actions.loadModalMsg(""));
+      alert("Registration successful!");
+    } catch (error) {
+      if (error.cause === "DUPLICATE_EMAIL") {
+        alert(
+          "There's already another breeder using this e-mail...please try another one."
+        );
+      } else {
+        alert(
+          "There's something wrong with the registration...please try again."
+        );
+      }
+      throw error;
     }
   };
 }

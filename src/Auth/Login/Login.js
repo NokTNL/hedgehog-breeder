@@ -1,7 +1,8 @@
 import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components/macro";
 import Card, * as CardItems from "../../UI/Card/Card";
+import loginThunk from "./loginThunk";
 
 const StyledLogin = styled.main`
   height: 100%;
@@ -18,29 +19,23 @@ const StyledCard = styled(Card)`
 export default function Login({ setIsRegistering }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const dispatch = useDispatch();
 
-  const breederCredentials = useSelector(
-    (state) => state.auth.breederCredentials
-  );
-
-  const handleLogin = () => {
-    /**
-     * Check if user credentials are correct
-     **/
+  const handleLogin = async () => {
     const emailInput = emailRef.current.value;
     const passwordInput = passwordRef.current.value;
-    const targetBreeder = breederCredentials.find(
-      (breeder) => breeder.email === emailInput
-    );
 
-    if (
-      targetBreeder === undefined ||
-      targetBreeder.password !== passwordInput
-    ) {
-      alert("Incorrect breeder credentials!");
-      return;
+    try {
+      await dispatch(loginThunk(emailInput, passwordInput));
+    } catch (error) {
+      if (error.cause === "INCORRECT_CREDENTIALS") {
+        alert("Incorrect breeder credentials!");
+        return;
+      } else {
+        alert("There's something wrong with loggin in...please try again.");
+        throw error;
+      }
     }
-    // *** TODO: Login (with laoding modal)
   };
 
   const handleChooseRegister = () => {

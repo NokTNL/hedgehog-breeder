@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import registerThunk from "./registerThunk";
 
@@ -28,28 +27,14 @@ export default function RegisterModal({ setIsRegistering }) {
     /**
      * Send registration request
      */
-    try {
-      await dispatch(
-        registerThunk({
-          newEmail: emailRef.current.value,
-          newPassword: passwordRef.current.value,
-        })
-      );
-    } catch (error) {
-      if (error.cause === "DUPLICATE_EMAIL") {
-        alert(
-          "There's already another breeder using this e-mail...please try another one."
-        );
-        return;
-      } else {
-        alert(
-          "There's something wrong with the registration...please try again."
-        );
-        throw error;
-      }
-    }
-    alert("Registration successful!");
-    // close RegisterModal if succesful
+    await dispatch(
+      registerThunk({
+        newEmail: emailRef.current.value,
+        newPassword: passwordRef.current.value,
+      })
+    );
+
+    // close RegisterModal if successful
     setIsRegistering(false);
   };
 
