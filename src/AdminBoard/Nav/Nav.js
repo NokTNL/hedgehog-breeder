@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import authSlice from "../../Auth/authSlice";
+
 import styled from "styled-components/macro";
 import Button from "../../UI/Button";
 
@@ -12,9 +15,13 @@ const LogoutButton = styled(Button)`
 `;
 
 export default function Nav() {
+  const dispatch = useDispatch();
+  const handleLogOut = () => {
+    dispatch(authSlice.actions.login(""));
+  };
   return (
     <StyledNav>
-      <LogoutButton>Logout</LogoutButton>
+      <LogoutButton onClick={handleLogOut}>Logout</LogoutButton>
     </StyledNav>
   );
 }
