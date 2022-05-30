@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-boilerplate/static/css/main.987eb82d.css",
-    "main.js": "/react-boilerplate/static/js/main.d2a4e27d.js",
-    "static/media/bootstrap-icons.woff?": "/react-boilerplate/static/media/bootstrap-icons.7ff3ca6fa798de3f8ac2.woff",
-    "static/media/bootstrap-icons.woff2?": "/react-boilerplate/static/media/bootstrap-icons.f2539a501be3a673de05.woff2",
-    "static/media/hedgehog.svg": "/react-boilerplate/static/media/hedgehog.80053215cdf0f500aea0e3643045613a.svg",
-    "index.html": "/react-boilerplate/index.html",
-    "main.987eb82d.css.map": "/react-boilerplate/static/css/main.987eb82d.css.map",
-    "main.d2a4e27d.js.map": "/react-boilerplate/static/js/main.d2a4e27d.js.map"
+    "main.css": "/hedgehog-breeder/static/css/main.4017aa1f.css",
+    "main.js": "/hedgehog-breeder/static/js/main.9361bbff.js",
+    "static/media/bootstrap-icons.woff?": "/hedgehog-breeder/static/media/bootstrap-icons.7ff3ca6fa798de3f8ac2.woff",
+    "static/media/bootstrap-icons.woff2?": "/hedgehog-breeder/static/media/bootstrap-icons.f2539a501be3a673de05.woff2",
+    "static/media/hedgehog.svg": "/hedgehog-breeder/static/media/hedgehog.80053215cdf0f500aea0e3643045613a.svg",
+    "index.html": "/hedgehog-breeder/index.html",
+    "main.4017aa1f.css.map": "/hedgehog-breeder/static/css/main.4017aa1f.css.map",
+    "main.9361bbff.js.map": "/hedgehog-breeder/static/js/main.9361bbff.js.map"
   },
   "entrypoints": [
-    "static/css/main.987eb82d.css",
-    "static/js/main.d2a4e27d.js"
+    "static/css/main.4017aa1f.css",
+    "static/js/main.9361bbff.js"
   ]
 }
