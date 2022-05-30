@@ -21,7 +21,19 @@ export default function Login({ setIsRegistering }) {
   const passwordRef = useRef(null);
   const dispatch = useDispatch();
 
-  const handleLogin = async () => {
+  const handleLogin = async (event) => {
+    /**
+     *  Check form validity
+     */
+    // !!! Browser built-in prompt for invalid inputs will not pop up if event.preventDefault()
+    if (
+      !emailRef.current.validity.valid ||
+      !passwordRef.current.validity.valid
+    ) {
+      return;
+    }
+    event.preventDefault();
+
     const emailInput = emailRef.current.value;
     const passwordInput = passwordRef.current.value;
 
@@ -36,7 +48,7 @@ export default function Login({ setIsRegistering }) {
     <StyledLogin>
       <StyledCard>
         <CardItems.Header>Login to your incubator</CardItems.Header>
-        <CardItems.Form>
+        <CardItems.Form id="login-form">
           <CardItems.FormEntry>
             <CardItems.FormLabelSpan>Your eeemail:</CardItems.FormLabelSpan>
             <CardItems.FormInput
@@ -59,7 +71,9 @@ export default function Login({ setIsRegistering }) {
           </CardItems.FormEntry>
         </CardItems.Form>
         <CardItems.ButtonsCtn>
-          <CardItems.FormBtn onClick={handleLogin}>Logiiiin!</CardItems.FormBtn>
+          <CardItems.FormBtn form="login-form" onClick={handleLogin}>
+            Logiiiin!
+          </CardItems.FormBtn>
           <CardItems.FormBtn onClick={handleChooseRegister}>
             I am neeew to here...
           </CardItems.FormBtn>
