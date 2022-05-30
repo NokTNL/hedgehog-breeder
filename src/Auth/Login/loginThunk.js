@@ -5,7 +5,7 @@ export default function loginThunk({ emailInput, passwordInput }) {
   return async (dispatch, getState) => {
     try {
       /**
-       * Send registration request ...
+       * Send request ...
        */
       const result = await dispatch(
         fetchClientThunk({

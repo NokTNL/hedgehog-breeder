@@ -1,8 +1,12 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import styled from "styled-components/macro";
 import Nav from "./Nav/Nav";
 import AddUserBtn from "./AddUserBtn/AddUserBtn";
 import UserList from "./UserList/UserList";
-import UserDataContext from "./UserDataContext";
+import loadDataThunk from "./loadDataThunk";
+import authSlice from "../Auth/authSlice";
 
 const PageCtn = styled.main`
   height: 100%;
@@ -18,15 +22,25 @@ const BoardCtn = styled.main`
 `;
 
 export default function AdminBoard() {
+  const [hasDataLoaded, setHasDataLoaded] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async () => {
+      //*** For testing only */
+      dispatch(authSlice.actions.login("987398729347293"));
+      await dispatch(loadDataThunk());
+      // Load page when data has loaded
+      setHasDataLoaded(true);
+    })();
+  }, []);
+
   return (
-    // <UserDataContext.Provider>
     <PageCtn>
       <Nav />
       <BoardCtn>
         <AddUserBtn />
-        <UserList />
+        {hasDataLoaded && <UserList />}
       </BoardCtn>
     </PageCtn>
-    // </UserDataContext.Provider>
   );
 }

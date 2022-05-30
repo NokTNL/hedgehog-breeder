@@ -24,7 +24,8 @@ function App() {
   const loginToken = useSelector((state) => state.auth.loginToken);
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
-      {loginToken === "" ? <Auth /> : <AdminBoard />}
+      {/* If Login token does not exist, ask for credentials, otherwise get the Admin Board page */}
+      {/* loginToken === "" ? <Auth /> :  */ <AdminBoard />}
       {loadingModalMsg !== "" && <LoadingModal message={loadingModalMsg} />}
     </StyledApp>
   );

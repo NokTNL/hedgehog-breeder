@@ -16,7 +16,13 @@ const authSlice = createSlice({
       });
     },
     login(state, action) {
-      state.loginToken = action.payload;
+      const token = action.payload;
+      if (typeof token !== "string") {
+        throw new Error(
+          `authSlice: token ${token} needs to be of "string" type but got ${typeof token}`
+        );
+      }
+      state.loginToken = token;
     },
   },
 });

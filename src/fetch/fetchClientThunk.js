@@ -1,8 +1,12 @@
 import modalSlice from "../UI/Modal/modalSlice";
 
-const ENDPOINT_URL = "https://reqres.in/api";
-
-export default function fetchClientThunk({ loadMsg, endpoint, method, data }) {
+export default function fetchClientThunk({
+  loadMsg,
+  endpoint,
+  method,
+  data,
+  extraParams,
+}) {
   return async (dispatch, getState) => {
     try {
       /**
@@ -12,7 +16,7 @@ export default function fetchClientThunk({ loadMsg, endpoint, method, data }) {
       dispatch(modalSlice.actions.loadModalMsg(loadMsg));
 
       const response = await fetch(
-        `https://reqres.in/api/${endpoint}?delay=1`,
+        `https://reqres.in/api/${endpoint}?delay=1&${extraParams.join("&")}`,
         {
           method,
           body: JSON.stringify(data),
