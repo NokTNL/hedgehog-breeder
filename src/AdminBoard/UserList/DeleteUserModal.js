@@ -34,6 +34,7 @@ export default function DeleteUserModal({ setIsConfirmingDel, userIndex }) {
 
   const handleDelete = async () => {
     await dispatch(deleteUserThunk(userIndex));
+    // Fake deleting on remote database locally
     // This will dismount the whole UserCard including this Modal
     udDispatch({ type: "deleteUser", payload: userIndex });
   };

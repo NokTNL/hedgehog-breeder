@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import GenericBackdrop from "./GenericBackdrop";
 
 const Message = styled.div`
+  margin: 3rem;
   font-size: 3rem;
   font-weight: 700;
   color: white;

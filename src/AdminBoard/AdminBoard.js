@@ -32,7 +32,7 @@ export default function AdminBoard() {
   useEffect(() => {
     (async () => {
       //*** For testing only */
-      dispatch(authSlice.actions.login("987398729347293"));
+      // dispatch(authSlice.actions.login("987398729347293"));
       const data = await dispatch(loadDataThunk());
       // Load page when data has loaded
       udDispatch({ type: "loadData", payload: data });

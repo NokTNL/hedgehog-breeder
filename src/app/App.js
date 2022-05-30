@@ -25,7 +25,7 @@ function App() {
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
       {/* If Login token does not exist, ask for credentials, otherwise get the Admin Board page */}
-      {/* loginToken === "" ? <Auth /> :  */ <AdminBoard />}
+      {loginToken === "" ? <Auth /> : <AdminBoard />}
       {loadingModalMsg !== "" && <LoadingModal message={loadingModalMsg} />}
     </StyledApp>
   );
