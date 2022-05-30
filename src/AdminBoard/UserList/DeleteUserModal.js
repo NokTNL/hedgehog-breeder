@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import UserDataContext from "../UserDataContext";
 
@@ -5,6 +6,7 @@ import styled from "styled-components/macro";
 import BaseModalWrapper from "../../UI/Modal/BaseModalWrapper";
 import * as Card from "../../UI/Card/Card";
 import Button from "../../UI/Button";
+import deleteUserThunk from "./deleteUserThunk";
 
 const Avatar = styled.img`
   height: 10rem;
@@ -22,14 +24,20 @@ const ConfirmButton = styled(Button)`
 `;
 
 export default function DeleteUserModal({ setIsConfirmingDel, userIndex }) {
-  const userDataCtx = useContext(UserDataContext);
-  const { first_name: userName, avatar: imgUrl } = userDataCtx[userIndex];
+  const [udState, udDispatch] = useContext(UserDataContext);
+  const dispatch = useDispatch();
+  const { first_name: userName, avatar: imgUrl } = udState.userData[userIndex];
 
   const handleClose = () => {
     setIsConfirmingDel(false);
   };
 
-  const handleDelete = async () => {};
+  const handleDelete = async () => {
+    await dispatch(deleteUserThunk(userIndex));
+    // This will dismount the whole UserCard including this Modal
+    udDispatch({ type: "deleteUser", payload: userIndex });
+  };
+
   return (
     <BaseModalWrapper onClose={handleClose}>
       <Card.Header>{`Are you sure you want to adandon ${userName}? :(`}</Card.Header>

@@ -24,10 +24,10 @@ export default function UserList() {
   const { userData } = udState;
   return (
     <StyledSection>
-      <StyledH3>Your hedgehogs:</StyledH3>
+      <StyledH3>Your hedgehogs 🦔 🦔 🦔 </StyledH3>
       <StyledUl>
         {userData.map((user, index) => (
-          <UserCard userIndex={index} key={index} />
+          <UserCard userIndex={index} key={user.id} />
         ))}
       </StyledUl>
     </StyledSection>

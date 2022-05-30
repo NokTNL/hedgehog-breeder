@@ -16,7 +16,17 @@ const reducer = (state, action) => {
       state.hasDataLoaded = true;
       break;
     case "addUser":
+      break;
     case "deleteUser":
+      {
+        const index = action.payload;
+        if (index >= state.userData.length) {
+          throw new Error(
+            `UserDataContext.reducer.deleteUser: index ${index} is larger than state.userData.length`
+          );
+        }
+        state.userData.splice(index, 1);
+      }
       break;
     default:
       throw new Error(`UserDataContext: invalid action type ${action.type}`);

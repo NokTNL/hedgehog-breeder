@@ -1,11 +1,12 @@
 import modalSlice from "../UI/Modal/modalSlice";
 
 export default function fetchClientThunk({
-  loadMsg,
-  endpoint,
-  method,
+  loadMsg = "",
+  endpoint = "",
+  method = "GET",
   data,
-  extraParams,
+  extraParams = [],
+  parseJson = true,
 }) {
   return async (dispatch, getState) => {
     try {
@@ -25,7 +26,7 @@ export default function fetchClientThunk({
           },
         }
       );
-      const result = await response.json();
+      const result = parseJson ? await response.json() : null;
       if (!response.ok) {
         console.error(`fetchClientThunk: Bad HTTP status, response data:`);
         console.error(result);
