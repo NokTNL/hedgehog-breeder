@@ -4,6 +4,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     breederCredentials: [],
+    /** if !== "", the page is logged in */
+    loginToken: "",
   },
   reducers: {
     addBreeder(state, action) {
@@ -12,6 +14,9 @@ const authSlice = createSlice({
         email,
         password,
       });
+    },
+    login(state, action) {
+      state.loginToken = action.payload;
     },
   },
 });

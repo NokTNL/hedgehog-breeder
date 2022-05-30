@@ -25,17 +25,7 @@ export default function Login({ setIsRegistering }) {
     const emailInput = emailRef.current.value;
     const passwordInput = passwordRef.current.value;
 
-    try {
-      await dispatch(loginThunk(emailInput, passwordInput));
-    } catch (error) {
-      if (error.cause === "INCORRECT_CREDENTIALS") {
-        alert("Incorrect breeder credentials!");
-        return;
-      } else {
-        alert("There's something wrong with loggin in...please try again.");
-        throw error;
-      }
-    }
+    await dispatch(loginThunk({ emailInput, passwordInput }));
   };
 
   const handleChooseRegister = () => {

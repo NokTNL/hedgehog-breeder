@@ -21,9 +21,10 @@ const StyledApp = styled.div`
 function App() {
   const isBaseModalOpen = useSelector((state) => state.modal.isBaseModalOpen);
   const loadingModalMsg = useSelector((state) => state.modal.loadingModalMsg);
+  const loginToken = useSelector((state) => state.auth.loginToken);
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
-      <Auth />
+      {loginToken === "" ? <Auth /> : <AdminBoard />}
       {loadingModalMsg !== "" && <LoadingModal message={loadingModalMsg} />}
     </StyledApp>
   );
