@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import UserDataContext, { useUserData } from "./UserDataContext";
 
 import styled from "styled-components/macro";
 import Nav from "./Nav/Nav";
@@ -22,25 +23,31 @@ const BoardCtn = styled.main`
 `;
 
 export default function AdminBoard() {
-  const [hasDataLoaded, setHasDataLoaded] = useState(false);
+  // Top level state & dispatch initialisation for UserDataContext
+  const [udState, udDispatch] = useUserData();
+  const { hasDataLoaded } = udState;
+  // Redux dispatch
   const dispatch = useDispatch();
+
   useEffect(() => {
     (async () => {
       //*** For testing only */
       dispatch(authSlice.actions.login("987398729347293"));
-      await dispatch(loadDataThunk());
+      const data = await dispatch(loadDataThunk());
       // Load page when data has loaded
-      setHasDataLoaded(true);
+      udDispatch({ type: "loadData", payload: data });
     })();
   }, []);
 
   return (
-    <PageCtn>
-      <Nav />
-      <BoardCtn>
-        <AddUserBtn />
-        {hasDataLoaded && <UserList />}
-      </BoardCtn>
-    </PageCtn>
+    <UserDataContext.Provider value={[udState, udDispatch]}>
+      <PageCtn>
+        <Nav />
+        <BoardCtn>
+          <AddUserBtn />
+          {hasDataLoaded && <UserList />}
+        </BoardCtn>
+      </PageCtn>
+    </UserDataContext.Provider>
   );
 }

@@ -1,51 +1,40 @@
 import { createContext } from "react";
+import { useImmerReducer } from "use-immer";
 
-// *** TODO: don't use these data later!
-const PLACEHOLDER_DATA = [
-  {
-    id: 7,
-    email: "michael.lawson@reqres.in",
-    first_name: "Michael",
-    last_name: "Lawson",
-    avatar: "https://reqres.in/img/faces/7-image.jpg",
-  },
-  {
-    id: 8,
-    email: "lindsay.ferguson@reqres.in",
-    first_name: "Lindsay",
-    last_name: "Ferguson",
-    avatar: "https://reqres.in/img/faces/8-image.jpg",
-  },
-  {
-    id: 9,
-    email: "tobias.funke@reqres.in",
-    first_name: "Tobias",
-    last_name: "Funke",
-    avatar: "https://reqres.in/img/faces/9-image.jpg",
-  },
-  {
-    id: 10,
-    email: "byron.fields@reqres.in",
-    first_name: "Byron",
-    last_name: "Fields",
-    avatar: "https://reqres.in/img/faces/10-image.jpg",
-  },
-  {
-    id: 11,
-    email: "george.edwards@reqres.in",
-    first_name: "George",
-    last_name: "Edwards",
-    avatar: "https://reqres.in/img/faces/11-image.jpg",
-  },
-  {
-    id: 12,
-    email: "rachel.howell@reqres.in",
-    first_name: "Rachel",
-    last_name: "Howell",
-    avatar: "https://reqres.in/img/faces/12-image.jpg",
-  },
-];
+/**
+ * Initial State & reducer
+ */
+const INIT_STATE = {
+  hasDataLoaded: false,
+  userData: [],
+};
 
-const UserDataContext = createContext(PLACEHOLDER_DATA);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "loadData":
+      state.userData = action.payload;
+      state.hasDataLoaded = true;
+      break;
+    case "addUser":
+    case "deleteUser":
+      break;
+    default:
+      throw new Error(`UserDataContext: invalid action type ${action.type}`);
+  }
+};
+
+/**
+ * Custom Hook
+ */
+// Consuming INITIALISED state & dispatch for passing into a context's `value`
+export const useUserData = () => {
+  const [udState, udDispatch] = useImmerReducer(reducer, INIT_STATE);
+  return [udState, udDispatch];
+};
+
+/**
+ * Context
+ */
+const UserDataContext = createContext(null);
 
 export default UserDataContext;

@@ -20,12 +20,13 @@ const StyledUl = styled.ul`
 `;
 
 export default function UserList() {
-  const userDataCtx = useContext(UserDataContext);
+  const [udState] = useContext(UserDataContext);
+  const { userData } = udState;
   return (
     <StyledSection>
       <StyledH3>Your hedgehogs:</StyledH3>
       <StyledUl>
-        {userDataCtx.map((user, index) => (
+        {userData.map((user, index) => (
           <UserCard userIndex={index} key={index} />
         ))}
       </StyledUl>

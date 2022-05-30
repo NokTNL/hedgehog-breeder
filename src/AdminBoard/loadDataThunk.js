@@ -22,7 +22,7 @@ export default function loadDataThunk() {
         })
       );
 
-      return results;
+      return results.data;
     } catch (error) {
       alert(
         "Something wrong has happened when loading your hedgehogs ...please login again."

@@ -42,8 +42,8 @@ export default function UserCard({ userIndex }) {
   const [isConfirmingDel, setIsConfirmingDel] = useState(false);
 
   // Extract data
-  const userDataCtx = useContext(UserDataContext);
-  const { first_name: userName, avatar: imgUrl } = userDataCtx[userIndex];
+  const [udState] = useContext(UserDataContext);
+  const { first_name: userName, avatar: imgUrl } = udState.userData[userIndex];
 
   const handleChooseDelete = () => {
     setIsConfirmingDel(true);
