@@ -2,6 +2,9 @@ import fetchClientThunk from "../../fetch/fetchClientThunk";
 
 export default function deleteUserThunk(userIndex) {
   return async (dispatch, getState) => {
+    /**
+     * Send request
+     */
     try {
       await dispatch(
         fetchClientThunk({

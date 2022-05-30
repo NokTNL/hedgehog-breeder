@@ -62,8 +62,8 @@ export default function AddUserModal({ setIsAddingUser }) {
      * Send request
      */
     const newUser = await dispatch(addUserThunk({ imgUrl, newName }));
-    // Fake adding new user locally
 
+    // Fake adding new user locally
     udDispatch({
       type: "addUser",
       payload: {
@@ -72,7 +72,7 @@ export default function AddUserModal({ setIsAddingUser }) {
         id: newUser.id,
       },
     });
-    // Close if successful
+    // Close AddUserModal when finished
     setIsAddingUser(false);
   };
 

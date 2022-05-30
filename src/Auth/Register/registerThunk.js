@@ -7,8 +7,7 @@ export default function registerThunk({ newEmail, newPassword }) {
       /**
        * Send registration request ...
        */
-
-      await dispatch(
+      const token = await dispatch(
         fetchClientThunk({
           loadMsg: "Sending your request...",
           method: "POST",

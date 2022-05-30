@@ -19,7 +19,7 @@ export default function loginThunk({ emailInput, passwordInput }) {
           },
         })
       );
-      const token = result?.token;
+      const token = result.token;
       if (typeof token !== "string") {
         throw new Error(
           `loginThunk: invalid token ${token} of type ${typeof token}`

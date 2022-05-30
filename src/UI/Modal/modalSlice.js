@@ -13,11 +13,6 @@ const modalSlice = createSlice({
     },
     loadModalMsg(state, action) {
       const msg = action.payload;
-      if (typeof msg !== "string") {
-        throw new Error(
-          `modalSlice.loadModalMsg: payload ${msg} has improper type ${typeof msg}`
-        );
-      }
       state.loadingModalMsg = msg;
     },
   },

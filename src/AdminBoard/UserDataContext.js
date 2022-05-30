@@ -15,31 +15,17 @@ const reducer = (state, action) => {
       state.userData = action.payload;
       state.hasDataLoaded = true;
       break;
-    case "addUser": {
+    case "addUser":
       const newUser = action.payload;
-      for (const property of ["first_name", "avatar", "id"]) {
-        const value = newUser[property];
-        if (value === undefined || typeof value !== "string") {
-          throw new Error(
-            `UserDataContext.reducer.addUser: new user has invalid property ${property} of value ${value}`
-          );
-        }
-      }
+      // ** TODO: avoid duplicated user ids
       state.userData.push(newUser);
       break;
-    }
-    case "deleteUser": {
+    case "deleteUser":
       const index = action.payload;
-      if (index >= state.userData.length) {
-        throw new Error(
-          `UserDataContext.reducer.deleteUser: index ${index} is larger than state.userData.length`
-        );
-      }
       state.userData.splice(index, 1);
       break;
-    }
     default:
-      throw new Error(`UserDataContext: invalid action type ${action.type}`);
+      console.error(`UserDataContext: invalid action type ${action.type}`);
   }
 };
 
