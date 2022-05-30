@@ -88,6 +88,7 @@ export default function AddUserModal({ setIsAddingUser }) {
         <Card.FormEntry>
           <Card.FormLabelSpan>What's my name?</Card.FormLabelSpan>
           <Card.FormInput
+            placeholder="Give meee a name!"
             ref={newNameInputRef}
             onInput={handleNameInput}
             required

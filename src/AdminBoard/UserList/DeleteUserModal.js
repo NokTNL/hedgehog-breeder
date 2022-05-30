@@ -23,7 +23,11 @@ const ConfirmButton = styled(Button)`
   align-self: center;
 `;
 
-export default function DeleteUserModal({ setIsConfirmingDel, userIndex }) {
+export default function DeleteUserModal({
+  setIsConfirmingDel,
+  userIndex,
+  delayDelCard,
+}) {
   const [udState, udDispatch] = useContext(UserDataContext);
   const dispatch = useDispatch();
   const { first_name: userName, avatar: imgUrl } = udState.userData[userIndex];
@@ -34,12 +38,12 @@ export default function DeleteUserModal({ setIsConfirmingDel, userIndex }) {
 
   const handleDelete = async () => {
     await dispatch(deleteUserThunk(userIndex));
-    // Fake deleting on remote database locally
-    // This will dismount the whole UserCard including this Modal
-    udDispatch({
-      type: "deleteUser",
-      payload: userIndex,
-    });
+    // Close this Modal
+    setIsConfirmingDel(false);
+    /**
+     * Card removal animation before dismouting
+     */
+    delayDelCard();
   };
 
   return (

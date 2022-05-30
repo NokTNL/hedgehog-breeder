@@ -1,5 +1,6 @@
 import fetchClientThunk from "../../fetch/fetchClientThunk";
 import authSlice from "../authSlice";
+import modalSlice from "../../UI/Modal/modalSlice";
 
 export default function registerThunk({ newEmail, newPassword }) {
   return async (dispatch, getState) => {
@@ -36,7 +37,17 @@ export default function registerThunk({ newEmail, newPassword }) {
       dispatch(
         authSlice.actions.addBreeder({ email: newEmail, password: newPassword })
       );
-      alert("Registration successful!");
+
+      /**
+       * Show "successful" animation
+       */
+      dispatch(modalSlice.actions.loadModalMsg("✅"));
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          dispatch(modalSlice.actions.loadModalMsg(""));
+          resolve();
+        }, 1000);
+      });
     } catch (error) {
       if (error.cause === "DUPLICATE_EMAIL") {
         alert(

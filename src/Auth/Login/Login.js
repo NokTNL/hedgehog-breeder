@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import loginThunk from "./loginThunk";
+
 import styled from "styled-components/macro";
 import Card, * as CardItems from "../../UI/Card/Card";
-import loginThunk from "./loginThunk";
+import bgSvg from "../../images/hedgehog.svg";
 
 const StyledLogin = styled.main`
   height: 100%;
@@ -10,10 +12,25 @@ const StyledLogin = styled.main`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  background-image: url(${bgSvg});
+  background-size: 4rem;
 `;
 
 const StyledCard = styled(Card)`
   border: 0.1rem solid gray;
+  margin: 1rem;
+`;
+
+const StyledHeader = styled(CardItems.Header)`
+  color: #cb2829;
+`;
+
+const LoginBtn = styled(CardItems.FormBtn)`
+  border: none;
+  background-color: #2d3bff;
+  color: white;
+  font-size: 1.1rem;
 `;
 
 export default function Login({ setIsRegistering }) {
@@ -47,7 +64,7 @@ export default function Login({ setIsRegistering }) {
   return (
     <StyledLogin>
       <StyledCard>
-        <CardItems.Header>Login to your incubator</CardItems.Header>
+        <StyledHeader>Login to your incubator</StyledHeader>
         <CardItems.Form id="login-form">
           <CardItems.FormEntry>
             <CardItems.FormLabelSpan>Your eeemail:</CardItems.FormLabelSpan>
@@ -71,9 +88,9 @@ export default function Login({ setIsRegistering }) {
           </CardItems.FormEntry>
         </CardItems.Form>
         <CardItems.ButtonsCtn>
-          <CardItems.FormBtn form="login-form" onClick={handleLogin}>
+          <LoginBtn form="login-form" onClick={handleLogin}>
             Logiiiin!
-          </CardItems.FormBtn>
+          </LoginBtn>
           <CardItems.FormBtn onClick={handleChooseRegister}>
             I am neeew to here...
           </CardItems.FormBtn>

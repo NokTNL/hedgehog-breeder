@@ -10,6 +10,16 @@ import Card from "../Card/Card";
 const BaseModalCard = styled(Card)`
   // To enable child elements using absolute positioning
   position: absolute;
+  margin: 1rem;
+
+  animation: base-modal-slidein 0.5s;
+
+  @keyframes base-modal-slidein {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+  }
 `;
 
 const CloseBtn = styled.button`
@@ -18,6 +28,13 @@ const CloseBtn = styled.button`
   right: 1rem;
 
   font-size: 1.5rem;
+
+  &:hover {
+    transform: translate(0.05rem, -0.05rem);
+  }
+  &:active {
+    transform: translate(-0.05rem, 0.05rem);
+  }
 `;
 
 const CloseTxt = styled.span`

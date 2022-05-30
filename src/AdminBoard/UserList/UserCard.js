@@ -2,6 +2,7 @@ import UserDataContext from "../UserDataContext";
 import { useContext, useState } from "react";
 import styled from "styled-components/macro";
 import DeleteUserModal from "./DeleteUserModal";
+import { css } from "styled-components";
 
 const StyledLi = styled.li`
   // For positioning children
@@ -16,6 +17,54 @@ const StyledLi = styled.li`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  // animation on initial render
+  animation: user-card-render 0.8s;
+
+  // animation on dismounting
+  ${(props) =>
+    props.isDismounting &&
+    css`
+      animation: user-card-dismount 2s forwards;
+    `}
+
+  &:hover {
+    transition: transform 0.4s;
+    transform: translateY(-0.3rem) scale(1.05);
+  }
+
+  @keyframes user-card-render {
+    from {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    50% {
+      transform: scale(1.1);
+      animation-timing-function: ease-in;
+    }
+  }
+
+  @keyframes user-card-dismount {
+    12.5%,
+    31.3%,
+    43.7% {
+      transform: rotate(-5deg);
+    }
+    25%,
+    37.5% {
+      transform: rotate(5deg);
+    }
+    50% {
+      transform: none;
+    }
+    60% {
+      transform: none;
+      animation-timing-function: cubic-bezier(1, 0.005, 0.94, 0.55);
+    }
+    to {
+      transform: scale(0);
+    }
+  }
 `;
 
 const Avatar = styled.img`
@@ -36,22 +85,50 @@ const DeleteBtn = styled.button`
 
   color: red;
   font-size: 1.3rem;
+
+  &:hover {
+    transition: transform 0.3s;
+    transform: scale(1.2);
+  }
+
+  &:active {
+    transition: none;
+    transform: translateY(0.1rem) scale(1.1);
+  }
 `;
 
 export default function UserCard({ userIndex }) {
   const [isConfirmingDel, setIsConfirmingDel] = useState(false);
 
   // Extract data
-  const [udState] = useContext(UserDataContext);
+  const [udState, udDispatch] = useContext(UserDataContext);
   const { first_name: userName, avatar: imgUrl } = udState.userData[userIndex];
 
   const handleChooseDelete = () => {
     setIsConfirmingDel(true);
   };
 
+  /**
+   * For delayed deletion of this UserCard after animation
+   */
+  const [isDismounting, setIsDismounting] = useState(false);
+  const delayDelCard = () => {
+    setIsDismounting(true);
+    setTimeout(() => {
+      /**
+       * Fake deleting on remote database locally
+       */
+      // This will dismount the whole UserCard & its DEleteUserModal
+      udDispatch({
+        type: "deleteUser",
+        payload: userIndex,
+      });
+    }, 2500);
+  };
+
   return (
     <>
-      <StyledLi>
+      <StyledLi isDismounting={isDismounting}>
         <Avatar src={imgUrl} alt={userName} />
         <div>{userName}</div>
         <DeleteBtn onClick={handleChooseDelete}>
@@ -64,6 +141,7 @@ export default function UserCard({ userIndex }) {
         <DeleteUserModal
           userIndex={userIndex}
           setIsConfirmingDel={setIsConfirmingDel}
+          delayDelCard={delayDelCard}
         />
       )}
     </>

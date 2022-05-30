@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 const GenericBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  overflow: auto; /* Enable scroll if needed */
+  overflow: hidden;
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
 

@@ -12,11 +12,17 @@ import authSlice from "../Auth/authSlice";
 const PageCtn = styled.main`
   height: 100%;
   display: flex;
+
+  @media (max-width: 40rem) {
+    flex-direction: column;
+  }
 `;
 const BoardCtn = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
+  // Create its own stacking context so 1. always go below the modal, and 2. Still let AddUserBtn goes above UserList
+  isolation: isolate;
 
   // This container is scrollable for overflowing <UserList>, but <AddUserBtn> will be sticky
   overflow-y: scroll;
