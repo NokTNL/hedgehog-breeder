@@ -18,4 +18,4 @@ The repo was initiated from my own [React Boilerplate](https://github.com/NokTNL
 
 ## Tests
 
-Manual testing was performed. See the `test` folder for more explanation.
+Manual testing was performed. See the `src/test` folder for more explanation.
