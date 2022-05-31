@@ -1,33 +1,21 @@
-# react-boilerplate
+# Hedgehog Breeder
 
-Created to save my time on setting up React and the libraries I use the most. It includes:
-- All dependencies and files created by `create-react-app` and have all demo files removed
-- Redux (`react-redux` and Redux Toolkit) with a pre-configured store
-- Github Pages (`gh-pages` as `devDependencies`)
-- [Styled components](https://github.com/styled-components)
-- [Normalized.css](https://github.com/necolas/normalize.css/)
+A hedgehog incubator where you can register as a breeder and breed some hedgehogs! 🦔🦔🦔🦔 (they have special hedgehoooogy accent though)
 
-## How to use:
-1. In the repo's main page, click "Code" -> "Download as ZIP"
-2. Unzip the folder and rename it to whatever you like, then go to Bash and `cd` into the folder, run:
-```
-npm install
-```
-- ✅ All done!
+- Preview: https://noktnl.github.io/hedgehog-breeder/
+- [Project Plan](https://rumbling-sleep-60c.notion.site/Hedgehog-breeder-Plan-086f64102b8f4aed95c5f9a1bfc4dd20)
+- [Project Kanban](https://www.notion.so/4909215f468c479f95ed2ea53c07df7f?v=294b53b61a544c2f9785ab8515274073)
 
-### To link it to your GitHub repo:
+## Techinical Aspects
 
-- create an empty repo in your GitHub, then in the folder's root, run:
-```
-git init
-git remote add origin git@github.com:GITHUB_AC_NAME/GITHUB_REPO_NAME.git
-git add .
-git commit -m "Initial commit"
-git push -u origin main
-```
-### To use Github Pages:
-1. Go to `package.json` and change `"homepage": "https://noktnl.github.io/react-boilerplate"` to your GitHub Pages link as shown in your repo
-2. In the folder's root, run:
-```
-npm run deploy
-```
+Files are grouped according to features [(the "ducks" pattern)](https://redux.js.org/style-guide/#structure-files-as-feature-folders-with-single-file-logic). The `app` folder contains the main `App`.
+
+- **State management:** Redux + RTK for global states, `useContext` + `useImmerReducer` + `useState` for more local states
+- **Data fetching**: Built a fetch client with vanilla JavaScript `fetch` (see the `fetch` folder) and used inside action creator thunks.
+- **Styling**: vainlla CSS (flexbox, grid, animations) and Styled Components, some SVG icons and images
+
+The repo was initiated from my own [React Boilerplate](https://github.com/NokTNL/react-boilerplate) to save some precious time on downloading packages.
+
+## Tests
+
+Manual testing was performed. See the `test` folder for more explanation.
