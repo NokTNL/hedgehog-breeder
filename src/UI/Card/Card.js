@@ -14,5 +14,9 @@ const Card = styled.section`
   flex-direction: column;
   text-align: center;
   gap: 3rem;
+
+  @media (max-width: 400px) {
+    gap: 1rem;
+  }
 `;
 export default Card;

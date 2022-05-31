@@ -12,7 +12,7 @@ Files are grouped according to features [(the "ducks" pattern)](https://redux.js
 
 - **State management:** Redux + RTK for global states, `useContext` + `useImmerReducer` + `useState` for more local states
 - **Data fetching**: Built a fetch client with vanilla JavaScript `fetch` (see the `fetch` folder) and used inside action creator thunks.
-- **Styling**: vainlla CSS (flexbox, grid, animations) and Styled Components, some SVG icons and images
+- **Styling**: vainlla CSS (flexbox, grid, animations) with full responsiveness, as well as some SVGs for aesthetics. CSS injected with Styled Components,
 
 The repo was initiated from my own [React Boilerplate](https://github.com/NokTNL/react-boilerplate) to save some precious time on downloading packages.
 

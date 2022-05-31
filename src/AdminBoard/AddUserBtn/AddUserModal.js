@@ -9,9 +9,7 @@ import * as Card from "../../UI/Card/Card";
 import Button from "../../UI/Button";
 import PendingUserAvatar from "./PendingUserAvatar";
 
-const ImageUrlInput = styled(Card.FormInput)`
-  min-width: 18em;
-`;
+const ImageUrlInput = styled(Card.FormInput)``;
 
 const ConfirmButton = styled(Button)`
   font-size: 1.2rem;
@@ -88,7 +86,7 @@ export default function AddUserModal({ setIsAddingUser }) {
         <Card.FormEntry>
           <Card.FormLabelSpan>What's my name?</Card.FormLabelSpan>
           <Card.FormInput
-            placeholder="Give meee a name!"
+            placeholder="Gimmeee a name!"
             ref={newNameInputRef}
             onInput={handleNameInput}
             required
@@ -97,7 +95,7 @@ export default function AddUserModal({ setIsAddingUser }) {
         <Card.FormEntry>
           <Card.FormLabelSpan>How should I look like?</Card.FormLabelSpan>
           <ImageUrlInput
-            placeholder="Paste an URL of an online image"
+            placeholder="Gimme an image URL!"
             ref={imgUrlInputRef}
             onInput={handleImgUrlInput}
             required
