@@ -4,8 +4,13 @@ import styled, { css } from "styled-components/macro";
 import AdminBoard from "../AdminBoard/AdminBoard";
 import Auth from "../Auth/Auth";
 import LoadingModal from "../UI/Modal/LoadingModal";
+import { RootState } from "./store";
 
-const StyledApp = styled.div`
+type StyledAppProps = {
+  isBaseModalOpen: boolean
+}
+
+const StyledApp = styled.div<StyledAppProps>`
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -19,9 +24,9 @@ const StyledApp = styled.div`
 `;
 
 function App() {
-  const isBaseModalOpen = useSelector((state) => state.modal.isBaseModalOpen);
-  const loadingModalMsg = useSelector((state) => state.modal.loadingModalMsg);
-  const loginToken = useSelector((state) => state.auth.loginToken);
+  const isBaseModalOpen = useSelector((state: RootState) => state.modal.isBaseModalOpen);
+  const loadingModalMsg = useSelector((state: RootState) => state.modal.loadingModalMsg);
+  const loginToken = useSelector((state: RootState) => state.auth.loginToken);
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
       {/* If Login token does not exist, ask for credentials, otherwise get the Admin Board page */}

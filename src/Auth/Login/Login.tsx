@@ -4,7 +4,8 @@ import loginThunk from "./loginThunk";
 
 import styled from "styled-components/macro";
 import Card, * as CardItems from "../../UI/Card/Card";
-import bgSvg from "../../images/hedgehog.svg";
+// .tsx file needs tweaks for importing images
+const bgSvg = require("../../images/hedgehog.svg") as string;
 
 const StyledLogin = styled.main`
   height: 100%;
@@ -33,12 +34,26 @@ const LoginBtn = styled(CardItems.FormBtn)`
   font-size: 1.1rem;
 `;
 
-export default function Login({ setIsRegistering }) {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+// This looks stupid but is necessary for passing setState func
+type Proptype = {
+  setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Login({ setIsRegistering }: Proptype) {
+  //
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: React.SyntheticEvent) => {
+    /**
+     * Typeguard
+     */
+    if (!emailRef.current || !passwordRef.current) {
+      throw Error(
+        "`emailRef` or `passwordRef` are not assigned to an HTML element"
+      );
+    }
     /**
      *  Check form validity
      */

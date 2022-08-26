@@ -1,8 +1,17 @@
 import fetchClientThunk from "../../fetch/fetchClientThunk";
 import authSlice from "../authSlice";
+import store from "../../app/store";
+import { isErrorWithCause } from "../../utils/typeguards";
 
-export default function loginThunk({ emailInput, passwordInput }) {
-  return async (dispatch, getState) => {
+const { dispatch, getState } = store;
+
+type ParamType = {
+  emailInput: string;
+  passwordInput: string;
+};
+
+export default function loginThunk({ emailInput, passwordInput }: ParamType) {
+  return async () => {
     try {
       /**
        * Send request ...
@@ -20,6 +29,7 @@ export default function loginThunk({ emailInput, passwordInput }) {
         })
       );
       const token = result.token;
+      // Type guard
       if (typeof token !== "string") {
         throw new Error(
           `loginThunk: invalid token ${token} of type ${typeof token}`
@@ -39,13 +49,17 @@ export default function loginThunk({ emailInput, passwordInput }) {
         targetBreeder.password !== passwordInput
       ) {
         throw new Error("loginThunk: Incorrect breeder credentials", {
-          cause: "INCORRECT_CREDENTIALS",
+          cause: new Error("INCORRECT_CREDENTIALS"),
         });
       }
       // Store a token to signal we have logged in
       dispatch(authSlice.actions.login(token));
     } catch (error) {
-      if (error.cause === "INCORRECT_CREDENTIALS") {
+      if (
+        // Type guard
+        isErrorWithCause(error) &&
+        error.cause.message === "INCORRECT_CREDENTIALS"
+      ) {
         alert("Incorrect breeder credentials!");
       } else {
         alert("There's something wrong with loggin in...please try again.");
