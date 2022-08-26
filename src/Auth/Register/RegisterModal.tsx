@@ -1,17 +1,29 @@
-import { useRef } from "react";
+import { SyntheticEvent, useRef } from "react";
 import { useDispatch } from "react-redux";
 import registerThunk from "./registerThunk";
 
 import BaseModalWrapper from "../../UI/Modal/BaseModalWrapper";
 import * as Card from "../../UI/Card/Card";
 
-export default function RegisterModal({ setIsRegistering }) {
+type Proptype = {
+  setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function RegisterModal({ setIsRegistering }: Proptype) {
   const dispatch = useDispatch();
 
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleRegister = async (event) => {
+  const handleRegister = async (event: SyntheticEvent) => {
+    /**
+     * Typeguard
+     */
+    if (!emailRef.current || !passwordRef.current) {
+      throw Error(
+        "`emailRef` or `passwordRef` are not assigned to an HTML element"
+      );
+    }
     /**
      *  Check form validity
      */

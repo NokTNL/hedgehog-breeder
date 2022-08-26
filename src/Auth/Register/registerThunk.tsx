@@ -1,9 +1,18 @@
 import fetchClientThunk from "../../fetch/fetchClientThunk";
 import authSlice from "../authSlice";
 import modalSlice from "../../UI/Modal/modalSlice";
+import store from "../../app/store";
+import { isErrorWithCause } from "../../utils/typeguards";
 
-export default function registerThunk({ newEmail, newPassword }) {
-  return async (dispatch, getState) => {
+const { dispatch, getState } = store;
+
+type ParamType = {
+  newEmail: string;
+  newPassword: string;
+};
+
+export default function registerThunk({ newEmail, newPassword }: ParamType) {
+  return async () => {
     try {
       /**
        * Send registration request ...
@@ -28,7 +37,7 @@ export default function registerThunk({ newEmail, newPassword }) {
       if (breederCredentials.some((breeder) => breeder.email === newEmail)) {
         throw new Error(
           `registerThunk: breeder with this e-mail already exists`,
-          { cause: "DUPLICATE_EMAIL" }
+          { cause: Error("DUPLICATE_EMAIL") }
         );
       }
       /**
@@ -45,11 +54,14 @@ export default function registerThunk({ newEmail, newPassword }) {
       await new Promise((resolve) => {
         setTimeout(() => {
           dispatch(modalSlice.actions.loadModalMsg(""));
-          resolve();
+          resolve(null);
         }, 1000);
       });
     } catch (error) {
-      if (error.cause === "DUPLICATE_EMAIL") {
+      if (
+        isErrorWithCause(error) &&
+        error.cause.message === "DUPLICATE_EMAIL"
+      ) {
         alert(
           "There's already another breeder using this e-mail...please try another one."
         );
