@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components/macro";
 
 const Avatar = styled.div`
@@ -22,7 +23,17 @@ const NotFoundTxt = styled.div`
   font-size: 1.2rem;
 `;
 
-export default function PendingUserAvatar({ imgUrl, hasImgErr, setHasImgErr }) {
+type PropType = {
+  imgUrl: string;
+  hasImgErr: boolean;
+  setHasImgErr: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function PendingUserAvatar({
+  imgUrl,
+  hasImgErr,
+  setHasImgErr,
+}: PropType) {
   const handleImgErr = () => {
     setHasImgErr(true);
   };

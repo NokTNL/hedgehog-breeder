@@ -17,19 +17,16 @@ export default function registerThunk({ newEmail, newPassword }: ParamType) {
       /**
        * Send registration request ...
        */
-      const token = await dispatch(
-        fetchClientThunk({
-          loadMsg: "Sending your request...",
-          method: "POST",
-          endpoint: "register",
-          data: {
-            // It should send real email here but the API only accepts email existing on their server
-            email: "eve.holt@reqres.in",
-            password: newPassword,
-          },
-        })
-      );
-
+      const token = await fetchClientThunk({
+        loadMsg: "Sending your request...",
+        method: "POST",
+        endpoint: "register",
+        data: {
+          // It should send real email here but the API only accepts email existing on their server
+          email: "eve.holt@reqres.in",
+          password: newPassword,
+        },
+      });
       /**
        * Check if user already exists (usually performed on the backend) ...
        **/

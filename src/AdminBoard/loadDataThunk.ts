@@ -16,14 +16,12 @@ export default async function loadDataThunk(): Promise<UserData[]> {
     /**
      * Send request ...
      */
-    const results = await dispatch(
-      fetchClientThunk({
-        loadMsg: "Loading you hedgehogs...",
-        method: "GET",
-        endpoint: "users",
-        extraParams: ["page=2"],
-      })
-    );
+    const results = await fetchClientThunk({
+      loadMsg: "Loading you hedgehogs...",
+      method: "GET",
+      endpoint: "users",
+      extraParams: ["page=2"],
+    });
 
     return results.data;
   } catch (error) {

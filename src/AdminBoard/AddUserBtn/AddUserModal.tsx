@@ -1,5 +1,10 @@
-import { useContext, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  FormEvent,
+  SyntheticEvent,
+} from "react";
 import UserDataContext from "../UserDataContext";
 import addUserThunk from "./addUserThunk";
 
@@ -18,32 +23,44 @@ const ConfirmButton = styled(Button)`
   align-self: center;
 `;
 
-export default function AddUserModal({ setIsAddingUser }) {
-  const [, udDispatch] = useContext(UserDataContext);
-  const dispatch = useDispatch();
+type PropType = {
+  setIsAddingUser: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function AddUserModal({ setIsAddingUser }: PropType) {
+  const udContext = useContext(UserDataContext);
+  // type guard
+  if (!udContext) throw Error("udContext is null, not initialised");
+  const [, udDispatch] = udContext;
 
   // For controlling what to display when image not found in PendingUserAvatar
   const [hasImgErr, setHasImgErr] = useState(false);
 
   const [imgUrl, setImgUrl] = useState("");
   const [newName, setNewName] = useState("");
-  const imgUrlInputRef = useRef(null);
-  const newNameInputRef = useRef(null);
+  const imgUrlInputRef = useRef<HTMLInputElement>(null);
+  const newNameInputRef = useRef<HTMLInputElement>(null);
 
   const handleClose = () => {
     setIsAddingUser(false);
   };
 
-  const handleImgUrlInput = (event) => {
+  const handleImgUrlInput = (event: FormEvent) => {
     setHasImgErr(false);
-    setImgUrl(event.target.value);
+    setImgUrl((event.target as HTMLInputElement).value);
   };
 
-  const handleNameInput = (event) => {
-    setNewName(event.target.value);
+  const handleNameInput = (event: FormEvent) => {
+    setNewName((event.target as HTMLInputElement).value);
   };
 
-  const handleConfirmAdd = async (event) => {
+  const handleConfirmAdd = async (event: SyntheticEvent) => {
+    /**
+     * Typeguard
+     */
+    if (!imgUrlInputRef.current || !newNameInputRef.current) {
+      throw Error("Input refs are not assigned to an HTML element");
+    }
     /**
      *  Check form validity
      */
@@ -59,7 +76,7 @@ export default function AddUserModal({ setIsAddingUser }) {
     /**
      * Send request
      */
-    const newUser = await dispatch(addUserThunk({ imgUrl, newName }));
+    const newUser = await addUserThunk({ imgUrl, newName });
 
     // Fake adding new user locally
     udDispatch({

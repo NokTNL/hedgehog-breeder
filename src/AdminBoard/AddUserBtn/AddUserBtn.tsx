@@ -1,5 +1,4 @@
-import UserDataContext from "../UserDataContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import styled from "styled-components/macro";
 import AddUserModal from "./AddUserModal";

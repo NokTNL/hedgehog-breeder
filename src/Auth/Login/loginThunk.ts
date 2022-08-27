@@ -16,18 +16,17 @@ export default function loginThunk({ emailInput, passwordInput }: ParamType) {
       /**
        * Send request ...
        */
-      const result = await dispatch(
-        fetchClientThunk({
-          loadMsg: "Logging in...",
-          method: "POST",
-          endpoint: "login",
-          data: {
-            // It should send real email here but the API only accepts email existing on their server
-            email: "eve.holt@reqres.in",
-            password: passwordInput,
-          },
-        })
-      );
+      const result = await fetchClientThunk({
+        loadMsg: "Logging in...",
+        method: "POST",
+        endpoint: "login",
+        data: {
+          // It should send real email here but the API only accepts email existing on their server
+          email: "eve.holt@reqres.in",
+          password: passwordInput,
+        },
+      });
+
       const token = result.token;
       // Type guard
       if (typeof token !== "string") {

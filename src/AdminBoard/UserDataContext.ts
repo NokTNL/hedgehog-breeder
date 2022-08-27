@@ -6,11 +6,11 @@ import { useImmerReducer } from "use-immer";
  */
 // 🤯
 export type UserData = {
-  id: number;
-  email: string;
   first_name: string;
-  last_name: string;
+  id: number;
   avatar: string;
+  email?: string;
+  last_name?: string;
 };
 
 type StateType = {
