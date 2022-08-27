@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import UserDataContext, { useUserData } from "./UserDataContext";
 
 import styled from "styled-components/macro";
@@ -7,7 +6,7 @@ import Nav from "./Nav/Nav";
 import AddUserBtn from "./AddUserBtn/AddUserBtn";
 import UserList from "./UserList/UserList";
 import loadDataThunk from "./loadDataThunk";
-import authSlice from "../Auth/authSlice";
+// import authSlice from "../Auth/authSlice";
 
 const PageCtn = styled.main`
   height: 100%;
@@ -32,14 +31,12 @@ export default function AdminBoard() {
   // Top level state & dispatch initialisation for UserDataContext
   const [udState, udDispatch] = useUserData();
   const { hasDataLoaded } = udState;
-  // Redux dispatch
-  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       //*** For testing only */
       // dispatch(authSlice.actions.login("987398729347293"));
-      const data = await dispatch(loadDataThunk());
+      const data = await loadDataThunk();
       // Load page when data has loaded
       udDispatch({ type: "loadData", payload: data });
     })();

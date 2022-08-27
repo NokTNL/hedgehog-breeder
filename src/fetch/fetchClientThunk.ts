@@ -1,14 +1,26 @@
 import modalSlice from "../UI/Modal/modalSlice";
+import store from "../app/store";
+
+const { dispatch } = store;
+
+type ParamType = {
+  loadMsg: string;
+  endpoint?: string;
+  method?: "GET" | "POST" | "DELETE";
+  data?: any;
+  extraParams?: string[];
+  parseJson?: boolean;
+};
 
 export default function fetchClientThunk({
-  loadMsg = "",
+  loadMsg,
   endpoint = "",
   method = "GET",
-  data,
+  data = {},
   extraParams = [],
   parseJson = true,
-}) {
-  return async (dispatch, getState) => {
+}: ParamType) {
+  return async () => {
     try {
       /**
        * Send registration request ...

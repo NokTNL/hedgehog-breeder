@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 import styled from "styled-components/macro";
 
 export const Form = styled.form`
@@ -7,7 +8,7 @@ export const Form = styled.form`
 `;
 
 // To use it, wrap around <FormLabelSpan> & <FormInput>
-export const FormEntry = ({ children }) => {
+export const FormEntry = ({ children }: PropsWithChildren) => {
   return <FormLabel>{children}</FormLabel>;
 };
 

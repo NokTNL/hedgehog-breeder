@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { useEffect } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import modalSlice from "./modalSlice";
 
@@ -41,8 +41,15 @@ const CloseTxt = styled.span`
   display: none;
 `;
 
+type PropTypes = {
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+};
+
 // This component is used to wrap anything that needs a base modal. Uses portal to render outside <App>
-export default function BaseModalWrapper({ children, onClose }) {
+export default function BaseModalWrapper({
+  children,
+  onClose,
+}: PropsWithChildren<PropTypes>) {
   const dispatch = useDispatch();
   // Tell the whole App when the modal is displayed, and cleanup when dismounted
   useEffect(() => {
@@ -64,6 +71,6 @@ export default function BaseModalWrapper({ children, onClose }) {
         {children}
       </BaseModalCard>
     </GenericBackdrop>,
-    document.getElementById("modal-root")
+    document.getElementById("modal-root") as HTMLElement
   );
 }

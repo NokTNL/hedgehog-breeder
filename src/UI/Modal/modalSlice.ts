@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
   name: "modal",
@@ -8,10 +8,10 @@ const modalSlice = createSlice({
     loadingModalMsg: "",
   },
   reducers: {
-    showBaseModal(state, action) {
-      state.isBaseModalOpen = !!action.payload;
+    showBaseModal(state, action: PayloadAction<boolean>) {
+      state.isBaseModalOpen = action.payload;
     },
-    loadModalMsg(state, action) {
+    loadModalMsg(state, action: PayloadAction<string>) {
       const msg = action.payload;
       state.loadingModalMsg = msg;
     },

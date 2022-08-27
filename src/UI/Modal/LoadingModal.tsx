@@ -19,12 +19,16 @@ const Message = styled.div`
   }
 `;
 
+type PropType = {
+  message: string;
+};
+
 // This is needed when somthing is loading etc. Goes above <ModalWrapper> which is rendered in "modal-root"
-export default function LoadingModal({ message }) {
+export default function LoadingModal({ message }: PropType) {
   return ReactDOM.createPortal(
     <GenericBackdrop>
       <Message>{message}</Message>
     </GenericBackdrop>,
-    document.getElementById("loading-modal-root")
+    document.getElementById("loading-modal-root") as HTMLElement
   );
 }
