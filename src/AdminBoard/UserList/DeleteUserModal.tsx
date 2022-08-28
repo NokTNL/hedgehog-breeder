@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useContext } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import UserDataContext from "../UserDataContext";
 
 import styled from "styled-components/macro";
@@ -23,12 +23,18 @@ const ConfirmButton = styled(Button)`
   align-self: center;
 `;
 
+type PropType = {
+  setIsConfirmingDel: Dispatch<SetStateAction<boolean>>;
+  userIndex: number;
+  delayDelCard: () => void;
+};
+
 export default function DeleteUserModal({
   setIsConfirmingDel,
   userIndex,
   delayDelCard,
-}) {
-  const [udState, udDispatch] = useContext(UserDataContext);
+}: PropType) {
+  const [udState] = useContext(UserDataContext)!;
   const dispatch = useDispatch();
   const { first_name: userName, avatar: imgUrl } = udState.userData[userIndex];
 

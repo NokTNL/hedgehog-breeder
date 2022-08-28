@@ -62,7 +62,7 @@ export const useUserData = () => {
 /**
  * Context
  */
-type ContextType = ReturnType<typeof useUserData>;
-const UserDataContext = createContext<ContextType | null>(null);
+export type UDContextType = ReturnType<typeof useUserData>;
+const UserDataContext = createContext<UDContextType | null>(null);
 
 export default UserDataContext;

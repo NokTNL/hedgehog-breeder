@@ -4,7 +4,11 @@ import styled from "styled-components/macro";
 import DeleteUserModal from "./DeleteUserModal";
 import { css } from "styled-components";
 
-const StyledLi = styled.li`
+type StyledLiProp = {
+  isDismounting: boolean;
+};
+
+const StyledLi = styled.li<StyledLiProp>`
   // For positioning children
   position: relative;
 
@@ -97,11 +101,15 @@ const DeleteBtn = styled.button`
   }
 `;
 
-export default function UserCard({ userIndex }) {
+type PropType = {
+  userIndex: number;
+};
+
+export default function UserCard({ userIndex }: PropType) {
   const [isConfirmingDel, setIsConfirmingDel] = useState(false);
 
   // Extract data
-  const [udState, udDispatch] = useContext(UserDataContext);
+  const [udState, udDispatch] = useContext(UserDataContext)!;
   const { first_name: userName, avatar: imgUrl } = udState.userData[userIndex];
 
   const handleChooseDelete = () => {

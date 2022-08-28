@@ -20,7 +20,7 @@ const StyledUl = styled.ul`
 `;
 
 export default function UserList() {
-  const [udState] = useContext(UserDataContext);
+  const [udState] = useContext(UserDataContext)!;
   const { userData } = udState;
   return (
     <StyledSection>
