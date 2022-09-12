@@ -7,8 +7,8 @@ import LoadingModal from "../UI/Modal/LoadingModal";
 import { RootState } from "./store";
 
 type StyledAppProps = {
-  isBaseModalOpen: boolean
-}
+  isBaseModalOpen: boolean;
+};
 
 const StyledApp = styled.div<StyledAppProps>`
   height: 100vh;
@@ -24,8 +24,12 @@ const StyledApp = styled.div<StyledAppProps>`
 `;
 
 function App() {
-  const isBaseModalOpen = useSelector((state: RootState) => state.modal.isBaseModalOpen);
-  const loadingModalMsg = useSelector((state: RootState) => state.modal.loadingModalMsg);
+  const isBaseModalOpen = useSelector(
+    (state: RootState) => state.modal.isBaseModalOpen
+  );
+  const loadingModalMsg = useSelector(
+    (state: RootState) => state.modal.loadingModalMsg
+  );
   const loginToken = useSelector((state: RootState) => state.auth.loginToken);
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>

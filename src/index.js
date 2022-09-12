@@ -9,6 +9,11 @@ import "./index.css";
 // Bootstrap icons (NOT Bootstrap!)
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+/**
+ * Typescript notes
+ * - store configuration: app/store.ts, app/hook.ts
+ */
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
