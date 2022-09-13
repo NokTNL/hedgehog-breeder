@@ -10,8 +10,10 @@ import "./index.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 /**
- * Typescript notes
+ * Typescript notes for Redux
  * - store configuration: app/store.ts, app/hook.ts
+ * - using useSelctor Hook: App.tsx
+ * - using useDispatch hook & thunks: Auth/Login/Login.tsx, Auth/Login/loginThunk.ts
  */
 
 ReactDOM.render(

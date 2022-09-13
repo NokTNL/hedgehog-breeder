@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
 import loginThunk from "./loginThunk";
 
 import styled from "styled-components/macro";
 import Card, * as CardItems from "../../UI/Card/Card";
+import { useTypedDispatch } from "../../app/hooks";
 // .tsx file needs tweaks for importing images
 const bgSvg = require("../../images/hedgehog.svg") as string;
 
@@ -40,10 +40,11 @@ type Proptype = {
 };
 
 export default function Login({ setIsRegistering }: Proptype) {
-  //
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
+
+  // Use our typed dispatch
+  const dispatch = useTypedDispatch();
 
   const handleLogin = async (event: React.SyntheticEvent) => {
     /**
@@ -69,7 +70,9 @@ export default function Login({ setIsRegistering }: Proptype) {
     const emailInput = emailRef.current.value;
     const passwordInput = passwordRef.current.value;
 
-    await dispatch(loginThunk({ emailInput, passwordInput }));
+    // loginThunk() returns a thunk action (which is a FUNCTION). `dispatch()` will then return whatever is returned from the thunk (here it is Promise<void>)
+    // You can `await` here if the thunk action is an async function
+    dispatch(loginThunk({ emailInput, passwordInput }));
   };
 
   const handleChooseRegister = () => {

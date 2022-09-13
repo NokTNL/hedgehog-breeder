@@ -4,6 +4,7 @@ import styled, { css } from "styled-components/macro";
 import AdminBoard from "../AdminBoard/AdminBoard";
 import Auth from "../Auth/Auth";
 import LoadingModal from "../UI/Modal/LoadingModal";
+import { useTypedSelector } from "./hooks";
 import { RootState } from "./store";
 
 type StyledAppProps = {
@@ -24,13 +25,16 @@ const StyledApp = styled.div<StyledAppProps>`
 `;
 
 function App() {
+  // useSelector's callback receives the whole state, so you just need to tell the shape of the store:
   const isBaseModalOpen = useSelector(
     (state: RootState) => state.modal.isBaseModalOpen
   );
-  const loadingModalMsg = useSelector(
-    (state: RootState) => state.modal.loadingModalMsg
+  // To reduce repetition , use our typed useSelector:
+  const loadingModalMsg = useTypedSelector(
+    (state) => state.modal.loadingModalMsg
   );
-  const loginToken = useSelector((state: RootState) => state.auth.loginToken);
+  const loginToken = useTypedSelector((state) => state.auth.loginToken);
+
   return (
     <StyledApp isBaseModalOpen={isBaseModalOpen}>
       {/* If Login token does not exist, ask for credentials, otherwise get the Admin Board page */}
